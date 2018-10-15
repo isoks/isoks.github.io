@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="isoks.">
 <meta property="og:description" content="首先 配置富文本Controller 。 富文本controller等放在七牛里. js：1234567891011121314var fileManager;var upload;function creatke(fileManagerJson, uploadJson) &amp;#123;    fileManager = fileManagerJson;    upload = uploadJson">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:updated_time" content="2018-02-11T05:43:31.359Z">
+<meta property="og:updated_time" content="2018-10-15T05:55:00.575Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MVC5下ajax异步加载kindeditor富文本">
 <meta name="twitter:description" content="首先 配置富文本Controller 。 富文本controller等放在七牛里. js：1234567891011121314var fileManager;var upload;function creatke(fileManagerJson, uploadJson) &amp;#123;    fileManager = fileManagerJson;    upload = uploadJson">
@@ -166,7 +166,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>首先 配置富文本Controller 。</p>
-<p><a href="http://7xl2ye.com1.z0.glb.clouddn.com/KindEditor%E5%AF%8C%E6%96%87%E6%9C%AC.zip" target="_blank" rel="noopener">富文本controller</a>等放在七牛里.</p>
+<p><a href="http://image.isoks.cn/KindEditor%E5%AF%8C%E6%96%87%E6%9C%AC.zip" target="_blank" rel="noopener">富文本controller</a>等放在七牛里.</p>
 <p>js：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">var fileManager;</span><br><span class="line">var upload;</span><br><span class="line">function creatke(fileManagerJson, uploadJson) &#123;</span><br><span class="line">    fileManager = fileManagerJson;</span><br><span class="line">    upload = uploadJson;</span><br><span class="line">    var editor;</span><br><span class="line">    editor = KindEditor.create(&apos;textarea[id=&quot;content&quot;]&apos;, &#123;//textarea</span><br><span class="line">        allowFileManager: false,                  //是否允许文件上传</span><br><span class="line">        allowUpload: true,</span><br><span class="line">        fileManagerJson: fileManagerJson, //浏览文件方法</span><br><span class="line">        uploadJson: uploadJson,  //上传文件方法</span><br><span class="line">        afterBlur: function () &#123; this.sync(); &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>A页面：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(function () &#123;</span><br><span class="line"> creatke(&apos;@Url.Action(&quot;ProcessRequest&quot;, &quot;KindEditor&quot;)&apos;, &apos;@Url.Action(&quot;UploadImage&quot;, &quot;KindEditor&quot;)&apos;);</span><br><span class="line">           &#125;);</span><br></pre></td></tr></table></figure>

@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="isoks.">
 <meta property="og:description" content="小程序引入crypto-js.js 12345678910var t = new Date().getTime();var CryptoJS = require(&apos;./crypto-js&apos;);var k = &quot;XXXXXXXXXXXXXXXXXXXXXXXXXX&quot;;var pstr = &quot;isoks&quot;var enStrp = CryptoJS.AES.encrypt(CryptoJS.enc.Ut">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:updated_time" content="2018-02-24T07:51:15.044Z">
+<meta property="og:updated_time" content="2018-10-15T05:57:19.538Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="微信小程序AES加密=&gt;C#解密">
 <meta name="twitter:description" content="小程序引入crypto-js.js 12345678910var t = new Date().getTime();var CryptoJS = require(&apos;./crypto-js&apos;);var k = &quot;XXXXXXXXXXXXXXXXXXXXXXXXXX&quot;;var pstr = &quot;isoks&quot;var enStrp = CryptoJS.AES.encrypt(CryptoJS.enc.Ut">
@@ -165,7 +165,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>小程序引入<a href="http://7xl2ye.com1.z0.glb.clouddn.com/crypto-js.js" target="_blank" rel="noopener">crypto-js.js</a></p>
+        <p>小程序引入<a href="http://image.isoks.cn/crypto-js.js" target="_blank" rel="noopener">crypto-js.js</a></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> t = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime();</span><br><span class="line"><span class="keyword">var</span> CryptoJS = <span class="built_in">require</span>(<span class="string">'./crypto-js'</span>);</span><br><span class="line"><span class="keyword">var</span> k = <span class="string">"XXXXXXXXXXXXXXXXXXXXXXXXXX"</span>;</span><br><span class="line"><span class="keyword">var</span> pstr = <span class="string">"isoks"</span></span><br><span class="line"><span class="keyword">var</span> enStrp = CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(pstr.toString()), CryptoJS.enc.Utf8.parse(k), &#123;</span><br><span class="line">  mode: CryptoJS.mode.ECB,</span><br><span class="line">  padding: CryptoJS.pad.Pkcs7</span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">return</span> enStrp.toString()</span><br></pre></td></tr></table></figure>
 <p><strong>c#：</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public static string Key =&gt; &quot;XXXXXXXXXXXXXXXXXXXXXXXXXX&quot;;</span><br><span class="line">  </span><br><span class="line">StringHelper.DecryptAES(Token, ServerToKen.Key);</span><br></pre></td></tr></table></figure>
