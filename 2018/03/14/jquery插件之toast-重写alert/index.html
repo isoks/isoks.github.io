@@ -17,7 +17,7 @@
 <meta property="og:description" content="h5原生的alert总是那么丑 在pc端还好说一些，在移动端简直就是逼死设计师/程序猿的存在.. 像我这种傻呆萌的程序猿，对一切美好的东西莫名的崇拜感，应该是容忍不了原生alert的存在 废话有点多，毕竟办公室就剩我一个人了，空空如也  我懵懵懂懂过了一年 守着你离开后的世界 空空如也  1234567//首先你肯定有一个全局的base.js   嗯,我就当你有了.//然后呢 写这么一句windo">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://image.isoks.cn/alert80314164656.png">
-<meta property="og:updated_time" content="2018-10-16T01:10:34.936Z">
+<meta property="og:updated_time" content="2018-10-16T02:24:30.588Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jquery插件之toast-重写alert">
 <meta name="twitter:description" content="h5原生的alert总是那么丑 在pc端还好说一些，在移动端简直就是逼死设计师/程序猿的存在.. 像我这种傻呆萌的程序猿，对一切美好的东西莫名的崇拜感，应该是容忍不了原生alert的存在 废话有点多，毕竟办公室就剩我一个人了，空空如也  我懵懵懂懂过了一年 守着你离开后的世界 空空如也  1234567//首先你肯定有一个全局的base.js   嗯,我就当你有了.//然后呢 写这么一句windo">
@@ -175,6 +175,7 @@
 <p>我懵懵懂懂过了一年 守着你离开后的世界 空空如也</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//首先你肯定有一个全局的base.js   嗯,我就当你有了.</span><br><span class="line">//然后呢 写这么一句</span><br><span class="line">window.alert = function (msg) &#123;</span><br><span class="line">    $.Toast(&#123;</span><br><span class="line">        msg: msg</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <p>然后呢，这个$.Toast是什么玩意？ [ 你听过空空如也吗？挺好听的呢..]</p>
 <p>其实就是个jquery插件</p>
 <p>源码如下：<a href="http://image.isoks.cn/jquery.isoks.toast.js" target="_blank" rel="noopener">jquery.isoks.toast</a></p>
