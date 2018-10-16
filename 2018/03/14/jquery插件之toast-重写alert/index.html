@@ -6,20 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="">
-  <title>MVC Filter | isoks.</title>
+  <title>jquery插件之toast-重写alert | isoks.</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="新增类：BaseAuthorization  123456789101112131415161718192021222324252627public class BaseAuthorizeAttribute : AuthorizeAttribute &amp;#123;    public override void OnAuthorization(AuthorizationContext filter">
-<meta name="keywords" content=".Net">
+  <meta name="description" content="h5原生的alert总是那么丑 在pc端还好说一些，在移动端简直就是逼死设计师/程序猿的存在.. 像我这种傻呆萌的程序猿，对一切美好的东西莫名的崇拜感，应该是容忍不了原生alert的存在 废话有点多，毕竟办公室就剩我一个人了，空空如也  我懵懵懂懂过了一年 守着你离开后的世界 空空如也  1234567//首先你肯定有一个全局的base.js   嗯,我就当你有了.//然后呢 写这么一句windo">
+<meta name="keywords" content="Js&amp;Jquery">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MVC Filter">
-<meta property="og:url" content="/2018/02/24/MVC-Filter/index.html">
+<meta property="og:title" content="jquery插件之toast-重写alert">
+<meta property="og:url" content="/2018/03/14/jquery插件之toast-重写alert/index.html">
 <meta property="og:site_name" content="isoks.">
-<meta property="og:description" content="新增类：BaseAuthorization  123456789101112131415161718192021222324252627public class BaseAuthorizeAttribute : AuthorizeAttribute &amp;#123;    public override void OnAuthorization(AuthorizationContext filter">
+<meta property="og:description" content="h5原生的alert总是那么丑 在pc端还好说一些，在移动端简直就是逼死设计师/程序猿的存在.. 像我这种傻呆萌的程序猿，对一切美好的东西莫名的崇拜感，应该是容忍不了原生alert的存在 废话有点多，毕竟办公室就剩我一个人了，空空如也  我懵懵懂懂过了一年 守着你离开后的世界 空空如也  1234567//首先你肯定有一个全局的base.js   嗯,我就当你有了.//然后呢 写这么一句windo">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:updated_time" content="2018-02-24T08:17:51.915Z">
+<meta property="og:image" content="http://image.isoks.cn/alert80314164656.png">
+<meta property="og:updated_time" content="2018-10-16T01:10:34.936Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MVC Filter">
-<meta name="twitter:description" content="新增类：BaseAuthorization  123456789101112131415161718192021222324252627public class BaseAuthorizeAttribute : AuthorizeAttribute &amp;#123;    public override void OnAuthorization(AuthorizationContext filter">
+<meta name="twitter:title" content="jquery插件之toast-重写alert">
+<meta name="twitter:description" content="h5原生的alert总是那么丑 在pc端还好说一些，在移动端简直就是逼死设计师/程序猿的存在.. 像我这种傻呆萌的程序猿，对一切美好的东西莫名的崇拜感，应该是容忍不了原生alert的存在 废话有点多，毕竟办公室就剩我一个人了，空空如也  我懵懵懂懂过了一年 守着你离开后的世界 空空如也  1234567//首先你肯定有一个全局的base.js   嗯,我就当你有了.//然后呢 写这么一句windo">
+<meta name="twitter:image" content="http://image.isoks.cn/alert80314164656.png">
   
     <link rel="alternative" href="/atom.xml" title="isoks." type="application/atom+xml">
   
@@ -145,33 +147,40 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-MVC-Filter" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-jquery插件之toast-重写alert" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      MVC Filter
+      jquery插件之toast-重写alert
     </h1>
   
 
         
-        <a href="/2018/02/24/MVC-Filter/" class="archive-article-date">
-  	<time datetime="2018-02-24T08:10:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-24</time>
+        <a href="/2018/03/14/jquery插件之toast-重写alert/" class="archive-article-date">
+  	<time datetime="2018-03-14T01:02:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-14</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>
-<p>新增类：BaseAuthorization</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public class BaseAuthorizeAttribute : AuthorizeAttribute</span><br><span class="line"> &#123;</span><br><span class="line">    public override void OnAuthorization(AuthorizationContext filterContext)</span><br><span class="line">    &#123;</span><br><span class="line">      try</span><br><span class="line">      &#123;</span><br><span class="line">          var httpcontext = filterContext.RequestContext.HttpContext;</span><br><span class="line">          var request = httpcontext.Request;</span><br><span class="line">          if (!BaseUser.IsLogin())</span><br><span class="line">          &#123;</span><br><span class="line">              var returnUrl = request.RawUrl;</span><br><span class="line">              var url = &quot;/login/index?returnUrl=&quot; + HttpUtility.UrlEncode(returnUrl);</span><br><span class="line">              filterContext.Result = new RedirectResult(url);</span><br><span class="line">              //跳转页面 -暂弃</span><br><span class="line">              //filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new</span><br><span class="line">              //&#123;</span><br><span class="line">              //    controller = &quot;Login&quot;,</span><br><span class="line">              //    action = &quot;index&quot;</span><br><span class="line">              //&#125;));</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      catch</span><br><span class="line">      &#123;</span><br><span class="line">          filterContext.Result = new RedirectResult(&quot;/login/index&quot;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+        <p>h5原生的alert总是那么丑</p>
+<p>在pc端还好说一些，在移动端简直就是逼死设计师/程序猿的存在..</p>
+<p>像我这种傻呆萌的程序猿，对一切美好的东西莫名的崇拜感，应该是容忍不了原生alert的存在</p>
+<p>废话有点多，毕竟办公室就剩我一个人了，空空如也</p>
 <blockquote>
-<p>Controller 上面增加：[BaseAuthorize]</p>
+<p>我懵懵懂懂过了一年 守着你离开后的世界 空空如也</p>
 </blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//首先你肯定有一个全局的base.js   嗯,我就当你有了.</span><br><span class="line">//然后呢 写这么一句</span><br><span class="line">window.alert = function (msg) &#123;</span><br><span class="line">    $.Toast(&#123;</span><br><span class="line">        msg: msg</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后呢，这个$.Toast是什么玩意？ [ 你听过空空如也吗？挺好听的呢..]</p>
+<p>其实就是个jquery插件</p>
+<p>源码如下：<a href="http://image.isoks.cn/jquery.isoks.toast.js" target="_blank" rel="noopener">jquery.isoks.toast</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">base页面引用这个js， 再加上上面的base.js里面的那句话</span><br><span class="line">页面上你就可以直接   alert(&quot;isoks&quot;)了</span><br><span class="line"></span><br><span class="line">jquery插件这里就不说了，去试试吧？</span><br><span class="line"></span><br><span class="line">ps：听听 空空如也 ，不错呢</span><br></pre></td></tr></table></figure>
+<p>哦 忘了，放张效果图.</p>
+<p><img src="http://image.isoks.cn/alert80314164656.png" alt=""></p>
 
       
 
@@ -216,7 +225,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">.Net</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Js&Jquery</a>
         		</li>
       		
 		</ul>
@@ -235,18 +244,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/03/14/jquery插件之toast-重写alert/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/03/20/像我这样的人/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          jquery插件之toast-重写alert
+          像我这样的人
         
       </div>
     </a>
   
   
-    <a href="/2018/02/24/微信小程序AES加密-C-解密/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">微信小程序AES加密=&gt;C#解密</div>
+    <a href="/2018/02/24/MVC-Filter/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">MVC Filter</div>
       <i class="icon-circle-right"></i>
     </a>
   

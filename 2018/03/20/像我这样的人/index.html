@@ -6,20 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="">
-  <title>MVC Filter | isoks.</title>
+  <title>像我这样的人 | isoks.</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="新增类：BaseAuthorization  123456789101112131415161718192021222324252627public class BaseAuthorizeAttribute : AuthorizeAttribute &amp;#123;    public override void OnAuthorization(AuthorizationContext filter">
-<meta name="keywords" content=".Net">
+  <meta name="keywords" content="随笔">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MVC Filter">
-<meta property="og:url" content="/2018/02/24/MVC-Filter/index.html">
+<meta property="og:title" content="像我这样的人">
+<meta property="og:url" content="/2018/03/20/像我这样的人/index.html">
 <meta property="og:site_name" content="isoks.">
-<meta property="og:description" content="新增类：BaseAuthorization  123456789101112131415161718192021222324252627public class BaseAuthorizeAttribute : AuthorizeAttribute &amp;#123;    public override void OnAuthorization(AuthorizationContext filter">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:updated_time" content="2018-02-24T08:17:51.915Z">
+<meta property="og:image" content="http://image.isoks.cn/QQ%E6%88%AA%E5%9B%BEWWWWW20180324105148.jpg">
+<meta property="og:updated_time" content="2018-10-16T01:17:06.973Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MVC Filter">
-<meta name="twitter:description" content="新增类：BaseAuthorization  123456789101112131415161718192021222324252627public class BaseAuthorizeAttribute : AuthorizeAttribute &amp;#123;    public override void OnAuthorization(AuthorizationContext filter">
+<meta name="twitter:title" content="像我这样的人">
+<meta name="twitter:image" content="http://image.isoks.cn/QQ%E6%88%AA%E5%9B%BEWWWWW20180324105148.jpg">
   
     <link rel="alternative" href="/atom.xml" title="isoks." type="application/atom+xml">
   
@@ -145,33 +144,27 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-MVC-Filter" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-像我这样的人" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      MVC Filter
+      像我这样的人
     </h1>
   
 
         
-        <a href="/2018/02/24/MVC-Filter/" class="archive-article-date">
-  	<time datetime="2018-02-24T08:10:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-24</time>
+        <a href="/2018/03/20/像我这样的人/" class="archive-article-date">
+  	<time datetime="2018-03-20T11:15:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-20</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>
-<p>新增类：BaseAuthorization</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public class BaseAuthorizeAttribute : AuthorizeAttribute</span><br><span class="line"> &#123;</span><br><span class="line">    public override void OnAuthorization(AuthorizationContext filterContext)</span><br><span class="line">    &#123;</span><br><span class="line">      try</span><br><span class="line">      &#123;</span><br><span class="line">          var httpcontext = filterContext.RequestContext.HttpContext;</span><br><span class="line">          var request = httpcontext.Request;</span><br><span class="line">          if (!BaseUser.IsLogin())</span><br><span class="line">          &#123;</span><br><span class="line">              var returnUrl = request.RawUrl;</span><br><span class="line">              var url = &quot;/login/index?returnUrl=&quot; + HttpUtility.UrlEncode(returnUrl);</span><br><span class="line">              filterContext.Result = new RedirectResult(url);</span><br><span class="line">              //跳转页面 -暂弃</span><br><span class="line">              //filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new</span><br><span class="line">              //&#123;</span><br><span class="line">              //    controller = &quot;Login&quot;,</span><br><span class="line">              //    action = &quot;index&quot;</span><br><span class="line">              //&#125;));</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      catch</span><br><span class="line">      &#123;</span><br><span class="line">          filterContext.Result = new RedirectResult(&quot;/login/index&quot;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>Controller 上面增加：[BaseAuthorize]</p>
-</blockquote>
+        <p><img src="http://image.isoks.cn/QQ%E6%88%AA%E5%9B%BEWWWWW20180324105148.jpg" alt=""></p>
 
       
 
@@ -216,7 +209,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">.Net</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
         		</li>
       		
 		</ul>
@@ -235,18 +228,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/03/14/jquery插件之toast-重写alert/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/05/01/Dotfuscator-混淆压缩/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          jquery插件之toast-重写alert
+          Dotfuscator 混淆压缩
         
       </div>
     </a>
   
   
-    <a href="/2018/02/24/微信小程序AES加密-C-解密/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">微信小程序AES加密=&gt;C#解密</div>
+    <a href="/2018/03/14/jquery插件之toast-重写alert/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">jquery插件之toast-重写alert</div>
       <i class="icon-circle-right"></i>
     </a>
   
