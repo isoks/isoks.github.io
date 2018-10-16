@@ -142,6 +142,87 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-EasyUI-combobox绑定与触发事件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/16/EasyUI-combobox绑定与触发事件/">EasyUI combobox绑定与触发事件</a>
+    </h1>
+  
+
+        
+        <a href="/2015/08/16/EasyUI-combobox绑定与触发事件/" class="archive-article-date">
+  	<time datetime="2015-08-16T09:52:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-08-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>easyui的combobox 请求ashx ,触发事件，根据combobox点击列表请求ashx相应的数据 ：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">$(&apos;#CompanyName&apos;).combobox(&#123;</span><br><span class="line">              url: &apos;ashx/StuCompanyManagementHandler.ashx?type=GetCompanyName&apos;,</span><br><span class="line">              valueField: &apos;id&apos;,</span><br><span class="line">              textField: &apos;text&apos;,</span><br><span class="line">              editable: false,</span><br><span class="line">              onChange: function (newValue, oldValue) &#123;</span><br><span class="line">                  var val = $(&apos;#CompanyName&apos;).combobox(&apos;getValue&apos;);</span><br><span class="line">                  $.post(&apos;ashx/StuCompanyManagementHandler.ashx?type=GetCompanyInfo&amp;CompanyName=&apos; + encodeURI(val), function (msg) &#123;</span><br><span class="line">                      var json = eval(&quot;(&quot; + msg + &quot;)&quot;);</span><br><span class="line">                      for (var i = 0; i &lt; json.rows.length; i++) &#123;</span><br><span class="line">                          if (json.rows[i].CompanyName == val</span><br><span class="line">                           &#123;</span><br><span class="line">                       $(&apos;#CompanyTel&apos;).val(json.rows[i].CompanyTel);</span><br><span class="line">                              $(&apos;#CompanyWork&apos;).combobox(&#123;</span><br><span class="line">                                  url: &apos;ashx/StuCompanyManagementHandler.ashx?type=GetCompanyWork&amp;CompanyName=&apos; + encodeURI(val),</span><br><span class="line">                                  valueField: &apos;id&apos;,</span><br><span class="line">                                  textField: &apos;text&apos;,</span><br><span class="line">                                  editable: false,</span><br><span class="line">                                  onChange: function (newValue, oldValue) &#123;</span><br><span class="line">                                      var val2 = $(&apos;#CompanyWork&apos;).combobox(&apos;getValue&apos;);</span><br><span class="line"></span><br><span class="line">                                      $.post(&apos;ashx/StuCompanyManagementHandler.ashx?type=GetCompanyInfo&amp;CompanyWork=&apos; + encodeURI(val2), function (msg) &#123;</span><br><span class="line">                                          var json = eval(&quot;(&quot; + msg + &quot;)&quot;);</span><br><span class="line"></span><br><span class="line">                                          for (var i = 0; i &lt; json.rows.length; i++) &#123;</span><br><span class="line"></span><br><span class="line">                                              if (json.rows[i].CompanyWork == val2) &#123;</span><br><span class="line">                                                  $(&apos;#CompanyTeaName&apos;).val(json.rows[i].CompanyTeaName);</span><br><span class="line"></span><br><span class="line">                                              &#125;</span><br><span class="line"></span><br><span class="line">                                          &#125;</span><br><span class="line"></span><br><span class="line">                                      &#125;);</span><br><span class="line"></span><br><span class="line">                                  &#125;</span><br><span class="line"></span><br><span class="line">                              &#125;); //end</span><br><span class="line"></span><br><span class="line">                          &#125; //if</span><br><span class="line"></span><br><span class="line">                      &#125; //for</span><br><span class="line"></span><br><span class="line">                  &#125;);</span><br><span class="line"></span><br><span class="line">              &#125;</span><br><span class="line"></span><br><span class="line">          &#125;);</span><br></pre></td></tr></table></figure>
+<p><strong>后台ashx :</strong></p>
+<h4 id="1-StuCompanyManagementHandler-ashx-type-GetCompanyInfo"><a href="#1-StuCompanyManagementHandler-ashx-type-GetCompanyInfo" class="headerlink" title="1. StuCompanyManagementHandler.ashx?type=GetCompanyInfo"></a>1. StuCompanyManagementHandler.ashx?type=GetCompanyInfo</h4><ul>
+<li>combobox json 格式：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">sb.Append(&quot;[&quot;);</span><br><span class="line">                  int count = dt.Rows.Count;</span><br><span class="line"></span><br><span class="line">                  for (int i = 0; i &lt; dt.Rows.Count; i++)</span><br><span class="line">                  &#123;</span><br><span class="line"></span><br><span class="line">                      sb.Append(&quot;&#123;\&quot;id\&quot;:\&quot;&quot; + dt.Rows[i][&quot;CompanyName&quot;] + &quot;\&quot;,\&quot;text\&quot;:\&quot;&quot; + dt.Rows[i][&quot;CompanyName&quot;] + &quot;\&quot;&#125;,&quot;);</span><br><span class="line"></span><br><span class="line">                  &#125;</span><br><span class="line">                  if (count &gt; 0)</span><br><span class="line">                  &#123;</span><br><span class="line">                      sb.Remove(sb.Length - 1, 1);</span><br><span class="line">                  &#125;</span><br><span class="line">                  sb.Append(&quot;]&quot;);</span><br><span class="line">              &#125;</span><br><span class="line">              context.Response.Write(sb.ToString());</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">if (context.Request.QueryString[&quot;type&quot;] == &quot;GetCompanyWork&quot;)</span><br><span class="line">     &#123;</span><br><span class="line">         string CompanyName = context.Request.QueryString[&quot;CompanyName&quot;].ToString();</span><br><span class="line">         try</span><br><span class="line">         &#123;</span><br><span class="line">             System.Data.DataTable dt = new System.Data.DataTable();</span><br><span class="line">             string SQL = &quot;select distinct CompanyWork from SPWCompanyDetails where CompanyName=&apos;&quot; + CompanyName + &quot;&apos;&quot;;</span><br><span class="line">             dt = Utility.DBHelper.GetDT(SQL);</span><br><span class="line">             System.Text.StringBuilder sb = new System.Text.StringBuilder();</span><br><span class="line">             if (dt.Rows.Count == 0)</span><br><span class="line">             &#123;</span><br><span class="line">                 sb.Append(&quot;&#123;[]&#125;&quot;);</span><br><span class="line">             &#125;</span><br><span class="line">             else</span><br><span class="line">             &#123;</span><br><span class="line">                 sb.Append(&quot;[&quot;);</span><br><span class="line">                 int count = dt.Rows.Count;</span><br><span class="line"></span><br><span class="line">                 for (int i = 0; i &lt; dt.Rows.Count; i++)</span><br><span class="line">                 &#123;</span><br><span class="line"></span><br><span class="line">                     sb.Append(&quot;&#123;\&quot;id\&quot;:\&quot;&quot; + dt.Rows[i][&quot;CompanyWork&quot;] + &quot;\&quot;,\&quot;text\&quot;:\&quot;&quot; + dt.Rows[i][&quot;CompanyWork&quot;] + &quot;\&quot;&#125;,&quot;);</span><br><span class="line"></span><br><span class="line">                 &#125;</span><br><span class="line">                 if (count &gt; 0)</span><br><span class="line">                 &#123;</span><br><span class="line">                     sb.Remove(sb.Length - 1, 1);</span><br><span class="line">                 &#125;</span><br><span class="line">                 sb.Append(&quot;]&quot;);</span><br><span class="line">             &#125;</span><br><span class="line">             context.Response.Write(sb.ToString());</span><br><span class="line">         &#125;</span><br><span class="line">         catch (Exception e)</span><br><span class="line">         &#123;</span><br><span class="line"></span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">.Net</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/08/16/EasyUI-combobox绑定与触发事件/">展开全文😊 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-清空表单输入" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
