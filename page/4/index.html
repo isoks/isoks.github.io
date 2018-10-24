@@ -142,6 +142,85 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-net-sql高级分页" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/28/net-sql高级分页/">.net sql高级分页</a>
+    </h1>
+  
+
+        
+        <a href="/2015/08/28/net-sql高级分页/" class="archive-article-date">
+  	<time datetime="2015-08-28T03:01:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-08-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>sql 高级分页 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">#region 分页</span><br><span class="line">    /// &lt;summary&gt;</span><br><span class="line">    /// 分页</span><br><span class="line">    /// &lt;/summary&gt;</span><br><span class="line">    /// &lt;param name=&quot;index&quot;&gt;页索引(从1开始)&lt;/param&gt;</span><br><span class="line">    /// &lt;param name=&quot;count&quot;&gt;每页显示数据条数&lt;/param&gt;</span><br><span class="line">    /// &lt;param name=&quot;where&quot;&gt;条件(abc=1)&lt;/param&gt;</span><br><span class="line">    /// &lt;param name=&quot;order&quot;&gt;排序(abc desc)&lt;/param&gt;</span><br><span class="line">    /// &lt;param name=&quot;param&quot;&gt;参数&lt;/param&gt;</span><br><span class="line">    /// &lt;returns&gt;实体类泛型集合&lt;/returns&gt;</span><br><span class="line">    public List&lt;material&gt; page(int index, int count, string where, string order, params  SqlParameter param)</span><br><span class="line">    &#123;</span><br><span class="line">        index = index &gt;= 1 ? index : 1;</span><br><span class="line">        count = count &gt;= 1 ? count : 10;</span><br><span class="line">        //sql 语句</span><br><span class="line">        string sql = &quot;select * from &quot;</span><br><span class="line">        + &quot; ( &quot;</span><br><span class="line">        + &quot; select ROW_NUMBER() over(order by [__Happy] desc) as [__Code] ,* from &quot;</span><br><span class="line">        + &quot; ( &quot;</span><br><span class="line">        + &quot; select top 500000 *,&apos;code&apos; as [__Happy] &quot;</span><br><span class="line">        + &quot; from dbo.[tb_material]&quot;;</span><br><span class="line">        if (!string.IsNullOrEmpty(where))</span><br><span class="line">        &#123;</span><br><span class="line">            sql += string.Format(&quot; where 1=1 and &#123;0&#125; &quot;, where);</span><br><span class="line">        &#125;</span><br><span class="line">        if (!string.IsNullOrEmpty(order))</span><br><span class="line">        &#123;</span><br><span class="line">            sql += string.Format(&quot; order by &#123;0&#125; &quot;, order);</span><br><span class="line">        &#125;</span><br><span class="line">        sql += &quot; )h &quot;</span><br><span class="line">        + &quot; )c &quot;</span><br><span class="line">        + string.Format(&quot; where [__Code]&gt;(&#123;1&#125;*(&#123;0&#125;-1)) and [__Code]&lt;=(&#123;1&#125;*&#123;0&#125;) ; &quot;, index, count);</span><br><span class="line">        //查询</span><br><span class="line">        SqlDataReader dr;</span><br><span class="line">        if (param != null)</span><br><span class="line">        &#123;</span><br><span class="line">            dr = SqlHelper.ExecuteReader(SqlConnectionString.conn, CommandType.Text, sql, param);</span><br><span class="line">        &#125;</span><br><span class="line">        else</span><br><span class="line">        &#123;</span><br><span class="line">            dr = SqlHelper.ExecuteReader(SqlConnectionString.conn, CommandType.Text, sql);</span><br><span class="line">        &#125;</span><br><span class="line">        List&lt;material&gt; list = new List&lt;material&gt;();</span><br><span class="line">        while (dr.Read())</span><br><span class="line">        &#123;</span><br><span class="line">            material m = new material();</span><br><span class="line">            m.Id = Convert.ToInt32(dr[&quot;id&quot;]);</span><br><span class="line">            m.Content = dr[&quot;content&quot;].ToString();</span><br><span class="line">            list.Add(m);</span><br><span class="line">        &#125;</span><br><span class="line">        if (dr != null)</span><br><span class="line">        &#123;</span><br><span class="line">            dr.Close();</span><br><span class="line">        &#125;</span><br><span class="line">        return list;</span><br><span class="line">    &#125;</span><br><span class="line">    #endregion</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">select * from(</span><br><span class="line">    select  ROW_NUMBER() over(order by z) as e ,* from (</span><br><span class="line">        select top 999999 &apos;z&apos; as z,*  from dbo.Tixian</span><br><span class="line">        where Id&gt;0</span><br><span class="line">        order by Id desc</span><br><span class="line">    )t </span><br><span class="line">)b</span><br><span class="line">where e&gt;(10*(2-1)) and e &lt;=10*(2);</span><br></pre></td></tr></table></figure>
+<p>清空数据库   truncate table<br>注意！有主外键关系的主表不可以 truncate table</p>
+<p>output inserted.字段   –插入数据，并返回刚刚插入的数据id</p>
+<p>insert into a (name) output inserted.id values(‘ejkhrfe’);返回id </p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">.Net</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/08/28/net-sql高级分页/">展开全文😊 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Net简单验证码" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
