@@ -142,6 +142,81 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-SQL防注入与递归查询" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/07/SQL防注入与递归查询/">SQL防注入与递归查询</a>
+    </h1>
+  
+
+        
+        <a href="/2015/09/07/SQL防注入与递归查询/" class="archive-article-date">
+  	<time datetime="2015-09-07T08:37:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-09-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>sql递归查询，防注入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">DataTable result = new DataTable();</span><br><span class="line"></span><br><span class="line">          result.Columns.Add(&quot;id&quot;);</span><br><span class="line">          result.Columns.Add(&quot;nickName&quot;);</span><br><span class="line">          result.Columns.Add(&quot;parentUser&quot;);</span><br><span class="line">          result.Columns.Add(&quot;price&quot;);</span><br><span class="line">          result.Columns.Add(&quot;total&quot;);</span><br><span class="line">          result.Columns.Add(&quot;counts&quot;);</span><br><span class="line">          int userid = Convert.ToInt32((SqlHelper.ExecuteDataset(SqlConnectionString.conn, CommandType.Text, &quot;select id from dbo.tb_user where userName= &apos;&quot; + (Session[&quot;admin_user&quot;] as Models.User).UserName + &quot;&apos;&quot;)).Tables[0].Rows[0][&quot;id&quot;]);</span><br><span class="line">          kw = Request.QueryString[&quot;kw&quot;];</span><br><span class="line">          GetDis(result, userid, kw);</span><br><span class="line">          rptUser.DataSource = result.DefaultView;</span><br><span class="line">          rptUser.DataBind();</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">	</span><br><span class="line">private static void GetDis(DataTable result, int userid, string key)</span><br><span class="line">&#123;</span><br><span class="line">    SqlParameter[] parm = new SqlParameter[] &#123;</span><br><span class="line">    new SqlParameter(&quot;nickName&quot;,&quot;%&quot;+key+&quot;%&quot;)</span><br><span class="line">    &#125;;</span><br><span class="line">    string sql = &quot;select * from dbo.[View_Shop_Total] where [parentUser]=&quot; + userid + &quot; and nickName like @nickName &quot;;</span><br><span class="line">    var ds = SqlHelper.ExecuteDataset(SqlConnectionString.conn, CommandType.Text, sql, parm);</span><br><span class="line">    if (ds.Tables.Count &gt; 0)</span><br><span class="line">    &#123;</span><br><span class="line">        var dt = ds.Tables[0];</span><br><span class="line">        foreach (DataRow r in dt.Rows)</span><br><span class="line">        &#123;</span><br><span class="line">            result.Rows.Add(r.ItemArray);</span><br><span class="line">            //递归</span><br><span class="line">            var id = Convert.ToInt32(r[&quot;id&quot;]);</span><br><span class="line">            GetDis(result, id, key);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">.Net</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/09/07/SQL防注入与递归查询/">展开全文😊 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-net-sql高级分页" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -859,82 +934,9 @@
 
 
   
-    <article id="post-JsonToString" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/13/JsonToString/">JsonToString</a>
-    </h1>
-  
-
-        
-        <a href="/2015/08/13/JsonToString/" class="archive-article-date">
-  	<time datetime="2015-08-13T08:06:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-08-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> jsonToString(obj) &#123;</span><br><span class="line">            var THIS = this;</span><br><span class="line">            switch (typeof (obj)) &#123;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">'string'</span>:</span><br><span class="line">                    <span class="built_in">return</span> <span class="string">'"'</span> + obj.replace(/([<span class="string">"\\])/g, '\\<span class="variable">$1</span>') + '"</span><span class="string">';</span></span><br><span class="line"><span class="string">                case '</span>array<span class="string">':</span></span><br><span class="line"><span class="string">                    return '</span>[<span class="string">' + obj.map(THIS.jsonToString).join('</span>,<span class="string">') + '</span>]<span class="string">';</span></span><br><span class="line"><span class="string">                case '</span>object<span class="string">':</span></span><br><span class="line"><span class="string">                    if (obj instanceof Array) &#123;</span></span><br><span class="line"><span class="string">                        var strArr = [];</span></span><br><span class="line"><span class="string">                        var len = obj.length;</span></span><br><span class="line"><span class="string">                        for (var i = 0; i &lt; len; i++) &#123;</span></span><br><span class="line"><span class="string">                            strArr.push(THIS.jsonToString(obj[i]));</span></span><br><span class="line"><span class="string">                        &#125;</span></span><br><span class="line"><span class="string">                        return '</span>[<span class="string">' + strArr.join('</span>,<span class="string">') + '</span>]<span class="string">';</span></span><br><span class="line"><span class="string">                    &#125; else if (obj == null) &#123;</span></span><br><span class="line"><span class="string">                        return '</span>null<span class="string">';</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">                    &#125; else &#123;</span></span><br><span class="line"><span class="string">                        var string = [];</span></span><br><span class="line"><span class="string">                        for (var property in obj) string.push(THIS.jsonToString(property) + '</span>:<span class="string">' + THIS.jsonToString(obj[property]));</span></span><br><span class="line"><span class="string">                        return '</span>&#123;<span class="string">' + string.join('</span>,<span class="string">') + '</span>&#125;<span class="string">';</span></span><br><span class="line"><span class="string">                    &#125;</span></span><br><span class="line"><span class="string">                case '</span>number<span class="string">':</span></span><br><span class="line"><span class="string">                    return obj;</span></span><br><span class="line"><span class="string">                case false:</span></span><br><span class="line"><span class="string">                    return obj;</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">.Net</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/08/13/JsonToString/">展开全文😊 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
     </nav>
   
 
@@ -1025,11 +1027,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Js&Jquery</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color1">SQL SERVER</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Js&Jquery</a>
               </li>
              
               <li class="article-tag-list-item">

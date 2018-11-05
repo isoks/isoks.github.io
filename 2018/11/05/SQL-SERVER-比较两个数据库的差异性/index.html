@@ -6,15 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://isoks.cn">
-  <title>Archives: 2018/3 | isoks.</title>
+  <title>SQL SERVER 比较两个数据库的差异性 | isoks.</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="isoks.">
-<meta property="og:url" content="https://isoks.cn/archives/2018/03/index.html">
+  <meta name="description" content="有时候部署服务器正式版与测试版数据库的时候 总会有忘记某些字段同步更新的问题 不管是字段类型 或是字段名称. 然后等待着的就是一堆的错误日志. 所以一直想找一款可以查找数据库差异性的脚本或软件 now, got it !运行以下SQL语句，查看数据库差异性">
+<meta name="keywords" content="SQL SERVER">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL SERVER 比较两个数据库的差异性">
+<meta property="og:url" content="https://isoks.cn/2018/11/05/SQL-SERVER-比较两个数据库的差异性/index.html">
 <meta property="og:site_name" content="isoks.">
+<meta property="og:description" content="有时候部署服务器正式版与测试版数据库的时候 总会有忘记某些字段同步更新的问题 不管是字段类型 或是字段名称. 然后等待着的就是一堆的错误日志. 所以一直想找一款可以查找数据库差异性的脚本或软件 now, got it !运行以下SQL语句，查看数据库差异性">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:updated_time" content="2018-11-05T05:36:56.812Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="isoks.">
+<meta name="twitter:title" content="SQL SERVER 比较两个数据库的差异性">
+<meta name="twitter:description" content="有时候部署服务器正式版与测试版数据库的时候 总会有忘记某些字段同步更新的问题 不管是字段类型 或是字段名称. 然后等待着的就是一堆的错误日志. 所以一直想找一款可以查找数据库差异性的脚本或软件 now, got it !运行以下SQL语句，查看数据库差异性">
   
     <link rel="alternative" href="/atom.xml" title="isoks." type="application/atom+xml">
   
@@ -140,98 +145,145 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-SQL-SERVER-比较两个数据库的差异性" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/20/像我这样的人/" class="archive-article-date">
-  	<time datetime="2018-03-20T11:15:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-20</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/20/像我这样的人/">像我这样的人</a>
+    <h1 class="article-title" itemprop="name">
+      SQL SERVER 比较两个数据库的差异性
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2018/11/05/SQL-SERVER-比较两个数据库的差异性/" class="archive-article-date">
+  	<time datetime="2018-11-05T05:25:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>有时候部署服务器正式版与测试版数据库的时候</p>
+<p>总会有忘记某些字段同步更新的问题</p>
+<p>不管是字段类型 或是字段名称. 然后等待着的就是一堆的错误日志.</p>
+<p>所以一直想找一款可以查找数据库差异性的脚本或软件</p>
+<h3 id="now-got-it"><a href="#now-got-it" class="headerlink" title="now, got it !"></a>now, got it !</h3><p>运行以下SQL语句，查看数据库差异性</p>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">-- u表，p存储过程,v视图</span><br><span class="line">-- INTFSIMSNEW新库，INTFSIMS旧库</span><br><span class="line"></span><br><span class="line">SELECT NTABLE = A.NAME, OTABLE = B.NAME</span><br><span class="line">FROM INTFSIMSNEW..SYSOBJECTS A</span><br><span class="line">  LEFT JOIN INTFSIMS..SYSOBJECTS B</span><br><span class="line">    ON A.NAME = B.NAME</span><br><span class="line">WHERE ISNULL(B.NAME, &apos;&apos;) = &apos;&apos;</span><br><span class="line">  AND A.XTYPE = &apos;U&apos;</span><br><span class="line"></span><br><span class="line">UNION ALL</span><br><span class="line"></span><br><span class="line">SELECT NTABLE = B.NAME, OTABLE = A.NAME</span><br><span class="line">FROM INTFSIMS..SYSOBJECTS A</span><br><span class="line">  LEFT JOIN INTFSIMSNEW..SYSOBJECTS B</span><br><span class="line">    ON A.NAME = B.NAME</span><br><span class="line">WHERE ISNULL(B.NAME, &apos;&apos;) = &apos;&apos;</span><br><span class="line">  AND A.XTYPE = &apos;U&apos;</span><br><span class="line">ORDER BY 1, 2</span><br><span class="line"></span><br><span class="line">-- 比较两个数据库中每个表字段的差异</span><br><span class="line">SELECT</span><br><span class="line">  表名A = CASE WHEN ISNULL(A.TABLENAME, &apos;&apos;) &lt;&gt; &apos;&apos; THEN A.TABLENAME ELSE B.TABLENAME END,</span><br><span class="line">  字段名A = A.FIELDNAME,</span><br><span class="line">  字段名B = B.FIELDNAME,</span><br><span class="line">  顺序= A.FIELDSNO,</span><br><span class="line">  说明= CASE WHEN A.FIELDTYPE &lt;&gt; B.FIELDTYPE THEN &apos;类型: &apos; + A.FIELDTYPE + &apos;--&gt;&apos; + B.FIELDTYPE</span><br><span class="line">              WHEN A.FIELDSNO &lt;&gt; B.FIELDSNO THEN &apos;顺序: &apos; + str(A.FIELDSNO) + &apos;--&gt;&apos; + str(B.FIELDSNO)</span><br><span class="line">              WHEN A.LENGTH &lt;&gt; B.LENGTH THEN &apos;长度: &apos; + str(A.LENGTH) + &apos;--&gt;&apos; + str(B.LENGTH)</span><br><span class="line">              WHEN A.LENSEC &lt;&gt; B.LENSEC THEN &apos;小数位: &apos; + str(A.LENSEC) + &apos;--&gt;&apos; + str(B.LENSEC)</span><br><span class="line">              WHEN A.ALLOWNULL &lt;&gt; B.ALLOWNULL THEN &apos;允许空值: &apos; + str(A.ALLOWNULL) + &apos;--&gt;&apos; + str(B.ALLOWNULL)</span><br><span class="line">         END</span><br><span class="line">FROM (SELECT</span><br><span class="line">        TABLENAME = B.NAME,</span><br><span class="line">        FIELDNAME = A.NAME,</span><br><span class="line">        FIELDSNO = A.COLID,</span><br><span class="line">        FIELDTYPE = C.NAME,</span><br><span class="line">        LENGTH = A.LENGTH,</span><br><span class="line">        LENSEC = A.XSCALE,</span><br><span class="line">        ALLOWNULL = A.ISNULLABLE</span><br><span class="line">      FROM INTFSIMSNEW..SYSCOLUMNS A</span><br><span class="line">        LEFT JOIN INTFSIMSNEW..SYSOBJECTS B</span><br><span class="line">          ON A.ID = B.ID</span><br><span class="line">        LEFT JOIN INTFSIMSNEW..SYSTYPES C</span><br><span class="line">          ON A.XUSERTYPE = C.XUSERTYPE</span><br><span class="line">      WHERE B.XTYPE = &apos;U&apos;) A</span><br><span class="line">  FULL JOIN (SELECT</span><br><span class="line">               TABLENAME = B.NAME,</span><br><span class="line">               FIELDNAME = A.NAME,</span><br><span class="line">               FIELDSNO = A.COLID,</span><br><span class="line">               FIELDTYPE = C.NAME,</span><br><span class="line">               LENGTH = A.LENGTH,</span><br><span class="line">               LENSEC = A.XSCALE,</span><br><span class="line">               ALLOWNULL = A.ISNULLABLE</span><br><span class="line">             FROM INTFSIMS..SYSCOLUMNS A</span><br><span class="line">               LEFT JOIN INTFSIMS..SYSOBJECTS B</span><br><span class="line">                 ON A.ID = B.ID</span><br><span class="line">               LEFT JOIN INTFSIMS..SYSTYPES C</span><br><span class="line">                 ON A.XUSERTYPE = C.XUSERTYPE</span><br><span class="line">             WHERE B.XTYPE = &apos;U&apos;) B</span><br><span class="line">    ON A.TABLENAME = B.TABLENAME</span><br><span class="line">      AND A.FIELDNAME = B.FIELDNAME</span><br><span class="line">WHERE ISNULL(A.TABLENAME, &apos;&apos;) = &apos;&apos;</span><br><span class="line">  OR ISNULL(B.TABLENAME, &apos;&apos;) = &apos;&apos;</span><br><span class="line">  OR A.FIELDTYPE &lt;&gt; B.FIELDTYPE</span><br><span class="line">  OR A.FIELDSNO &lt;&gt; B.FIELDSNO</span><br><span class="line">  OR A.LENGTH &lt;&gt; B.LENGTH</span><br><span class="line">  OR A.LENSEC &lt;&gt; B.LENSEC</span><br><span class="line">  OR A.ALLOWNULL &lt;&gt; B.ALLOWNULL</span><br><span class="line">ORDER by 1, 4</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              💗
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p">谢谢你请我吃糖果</p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://image.isoks.cn/zfbpaycode.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="http://image.isoks.cn/wxpaycode.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">SQL SERVER</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/14/jquery插件之toast-重写alert/" class="archive-article-date">
-  	<time datetime="2018-03-14T01:02:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-14</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2018/10/24/I-like-this-date/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">I like this date.</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/14/jquery插件之toast-重写alert/">jquery插件之toast-重写alert</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Js&Jquery</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#now-got-it"><span class="toc-number">1.</span> <span class="toc-text">now, got it !</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -254,8 +306,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

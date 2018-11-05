@@ -6,11 +6,11 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://isoks.cn">
-  <title>Archives: 2018/3 | isoks.</title>
+  <title>isoks.</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="isoks.">
-<meta property="og:url" content="https://isoks.cn/archives/2018/03/index.html">
+<meta property="og:url" content="https://isoks.cn/page/5/index.html">
 <meta property="og:site_name" content="isoks.">
 <meta property="og:locale" content="zh_CN">
 <meta name="twitter:card" content="summary">
@@ -142,96 +142,84 @@
           <div id="js-content" class="content-ll">
             
   
-  
+    <article id="post-JsonToString" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/20/像我这样的人/" class="archive-article-date">
-  	<time datetime="2018-03-20T11:15:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-20</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
     <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/20/像我这样的人/">像我这样的人</a>
+      <a class="article-title" href="/2015/08/13/JsonToString/">JsonToString</a>
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2015/08/13/JsonToString/" class="archive-article-date">
+  	<time datetime="2015-08-13T08:06:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-08-13</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> jsonToString(obj) &#123;</span><br><span class="line">            var THIS = this;</span><br><span class="line">            switch (typeof (obj)) &#123;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">'string'</span>:</span><br><span class="line">                    <span class="built_in">return</span> <span class="string">'"'</span> + obj.replace(/([<span class="string">"\\])/g, '\\<span class="variable">$1</span>') + '"</span><span class="string">';</span></span><br><span class="line"><span class="string">                case '</span>array<span class="string">':</span></span><br><span class="line"><span class="string">                    return '</span>[<span class="string">' + obj.map(THIS.jsonToString).join('</span>,<span class="string">') + '</span>]<span class="string">';</span></span><br><span class="line"><span class="string">                case '</span>object<span class="string">':</span></span><br><span class="line"><span class="string">                    if (obj instanceof Array) &#123;</span></span><br><span class="line"><span class="string">                        var strArr = [];</span></span><br><span class="line"><span class="string">                        var len = obj.length;</span></span><br><span class="line"><span class="string">                        for (var i = 0; i &lt; len; i++) &#123;</span></span><br><span class="line"><span class="string">                            strArr.push(THIS.jsonToString(obj[i]));</span></span><br><span class="line"><span class="string">                        &#125;</span></span><br><span class="line"><span class="string">                        return '</span>[<span class="string">' + strArr.join('</span>,<span class="string">') + '</span>]<span class="string">';</span></span><br><span class="line"><span class="string">                    &#125; else if (obj == null) &#123;</span></span><br><span class="line"><span class="string">                        return '</span>null<span class="string">';</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">                    &#125; else &#123;</span></span><br><span class="line"><span class="string">                        var string = [];</span></span><br><span class="line"><span class="string">                        for (var property in obj) string.push(THIS.jsonToString(property) + '</span>:<span class="string">' + THIS.jsonToString(obj[property]));</span></span><br><span class="line"><span class="string">                        return '</span>&#123;<span class="string">' + string.join('</span>,<span class="string">') + '</span>&#125;<span class="string">';</span></span><br><span class="line"><span class="string">                    &#125;</span></span><br><span class="line"><span class="string">                case '</span>number<span class="string">':</span></span><br><span class="line"><span class="string">                    return obj;</span></span><br><span class="line"><span class="string">                case false:</span></span><br><span class="line"><span class="string">                    return obj;</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">.Net</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/08/13/JsonToString/">展开全文😊 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/03/14/jquery插件之toast-重写alert/" class="archive-article-date">
-  	<time datetime="2018-03-14T01:02:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-14</time>
-</a>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/14/jquery插件之toast-重写alert/">jquery插件之toast-重写alert</a>
-    </h1>
-  
+        
+        
+    </div>
+</aside>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Js&Jquery</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
-          
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
   
   
-    </div></section>
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
+    </nav>
   
-
-    
 
 
           </div>
@@ -253,9 +241,9 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: false,
+		isHome: true,
 		isPost: false,
-		isArchive: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
