@@ -136,6 +136,82 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-微信小程序AES加密-C-解密" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/24/微信小程序AES加密-C-解密/">微信小程序AES加密=&gt;C#解密</a>
+    </h1>
+  
+
+        
+        <a href="/2018/02/24/微信小程序AES加密-C-解密/" class="archive-article-date">
+  	<time datetime="2018-02-24T07:47:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>小程序引入<a href="http://image.isoks.cn/crypto-js.js" target="_blank" rel="noopener">crypto-js.js</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> t = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime();</span><br><span class="line"><span class="keyword">var</span> CryptoJS = <span class="built_in">require</span>(<span class="string">'./crypto-js'</span>);</span><br><span class="line"><span class="keyword">var</span> k = <span class="string">"XXXXXXXXXXXXXXXXXXXXXXXXXX"</span>;</span><br><span class="line"><span class="keyword">var</span> pstr = <span class="string">"isoks"</span></span><br><span class="line"><span class="keyword">var</span> enStrp = CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(pstr.toString()), CryptoJS.enc.Utf8.parse(k), &#123;</span><br><span class="line">  mode: CryptoJS.mode.ECB,</span><br><span class="line">  padding: CryptoJS.pad.Pkcs7</span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">return</span> enStrp.toString()</span><br></pre></td></tr></table></figure>
+<p><strong>c#：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public static string Key =&gt; &quot;XXXXXXXXXXXXXXXXXXXXXXXXXX&quot;;</span><br><span class="line">  </span><br><span class="line">StringHelper.DecryptAES(Token, ServerToKen.Key);</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">.Net</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/02/24/微信小程序AES加密-C-解密/">展开全文😊 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-snowflake-雪花算法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1054,80 +1130,6 @@ $.post(url,$(<span class="string">'#isoksform'</span>).serializeObject(),callbac
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2015/11/24/cookies-remember-pass/">展开全文😊 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-17种正则表达式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/11/17种正则表达式/">17种正则表达式</a>
-    </h1>
-  
-
-        
-        <a href="/2015/11/11/17种正则表达式/" class="archive-article-date">
-  	<time datetime="2015-11-11T12:19:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-11-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">onkeyup=&quot;value = value.replace(/[^\d]/g, &apos;&apos;)&quot; //金钱</span><br><span class="line"></span><br><span class="line">&quot;^\d $&quot; //非负整数（正整数 0） </span><br><span class="line"></span><br><span class="line">&quot;^[0-9]*[1-9][0-9]*$&quot; //正整数 </span><br><span class="line"></span><br><span class="line">&quot;^((-\d )|(0 ))$&quot; //非正整数（负整数 0） </span><br><span class="line"></span><br><span class="line">&quot;^-[0-9]*[1-9][0-9]*$&quot; //负整数 </span><br><span class="line"></span><br><span class="line">&quot;^-?\d $&quot; //整数 </span><br><span class="line"></span><br><span class="line">&quot;^\d (\.\d )?$&quot; //非负浮点数（正浮点数 0） </span><br><span class="line"></span><br><span class="line">&quot;^(([0-9] \.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9] )|([0-9]*[1-9][0-9]*))$&quot; //正浮点数 </span><br><span class="line"></span><br><span class="line">&quot;^((-\d (\.\d )?)|(0 (\.0 )?))$&quot; //非正浮点数（负浮点数 0） </span><br><span class="line"></span><br><span class="line">&quot;^(-(([0-9] \.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\.[0-9] )|([0-9]*[1-9][0-9]*)))$&quot; //负浮点数 </span><br><span class="line"></span><br><span class="line">&quot;^(-?\d )(\.\d )?$&quot; //浮点数 </span><br><span class="line"></span><br><span class="line">&quot;^[A-Za-z] $&quot; //由26个英文字母组成的字符串 </span><br><span class="line"></span><br><span class="line">&quot;^[A-Z] $&quot; //由26个英文字母的大写组成的字符串 </span><br><span class="line"></span><br><span class="line">&quot;^[a-z] $&quot; //由26个英文字母的小写组成的字符串 </span><br><span class="line"></span><br><span class="line">&quot;^[A-Za-z0-9] $&quot; //由数字和26个英文字母组成的字符串 </span><br><span class="line"></span><br><span class="line">&quot;^\w $&quot; //由数字、26个英文字母或者下划线组成的字符串 </span><br><span class="line"></span><br><span class="line">&quot;^[\w-] (\.[\w-] )*@[\w-] (\.[\w-] ) $&quot; //email地址 </span><br><span class="line"></span><br><span class="line">&quot;^[a-zA-z] ://(\w (-\w )*)(\.(\w (-\w )*))*(\?\S*)?$&quot; //url</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">.Net</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2015/11/11/17种正则表达式/">展开全文😊 >></a>
         </p>
       
 
